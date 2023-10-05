@@ -8,17 +8,18 @@ or name_song ilike '% my'
 or name_song ilike 'my %' 
 or name_song ilike '% мой %' 
 or name_song ilike 'мой %' 
-or name_song ilike '% мой';
+or name_song ilike '% мой'
+or name_song ilike 'мой' 
+or name_song ilike 'my';
 
 
 select name_executor, count(name_executor) from executors
 join genres_executors on executors.id=genres_executors.id_executor 
 group by name_executor;
 
-select name_song, count(name_song) from songs
-join songs_collections on songs.id=songs_collections.id_song
-where collections.year_of_release between 2010 and 2011
-group by name_song;
+select count(name_song) from songs
+join album on songs.id_album = album.id
+where album.year_of_release between 2010 and 2011
 
 select name_collection, avg(songs.duration) from songs
 join songs_collections on songs.id=songs_collections.id_song
